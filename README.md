@@ -1,1 +1,0 @@
-# Setu-Industry-x-Innovation
