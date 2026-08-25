@@ -1,0 +1,25 @@
+<div class="block-label">Suggestions so far ({{ suggestions|length }})</div>
+{% if suggestions|length == 0 %}
+  <p style="color:var(--text-dim); font-size:13.5px;">No suggestions yet — be the first to submit one.</p>
+{% endif %}
+{% for s in suggestions %}
+  <div class="sugg-item">
+    <div class="top">
+      <div>
+        <h4 class="display">{{ s['title'] }}</h4>
+        <div class="by">by {{ s['name'] }}</div>
+      </div>
+      {% if s['status'] == 'interested' %}
+        <span class="badge">{{ 'Marked interested' if show_actions else 'Industry interested' }}</span>
+      {% endif %}
+    </div>
+    <p>{{ s['desc'] }}</p>
+    {% if show_actions and s['status'] != 'interested' %}
+    <div class="sugg-actions">
+      <form method="POST" action="{{ url_for('industry.mark_interested', suggestion_id=s['id']) }}">
+        <button class="ghost" type="submit">Mark interested</button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+{% endfor %}

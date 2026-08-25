@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{{ url_for('industry.dashboard') }}" class="back-link">← Back to dashboard</a>
+<div class="section-head"><h2 class="display">Post a new challenge</h2></div>
+<div class="form-panel" style="max-width:640px;">
+  <form method="POST" action="{{ url_for('industry.post_challenge') }}">
+    <div class="field">
+      <label>Company name</label>
+      <input type="text" name="company" required placeholder="e.g. Vasant Handloom Works, Surat">
+    </div>
+    <div class="field">
+      <label>Sector</label>
+      <input type="text" name="sector" required placeholder="e.g. Textile Manufacturing">
+    </div>
+    <div class="field">
+      <label>How your industry works</label>
+      <textarea name="workflow" required placeholder="Describe your process, so innovators understand the context"></textarea>
+    </div>
+    <div class="field">
+      <label>The challenge / problem</label>
+      <textarea name="challenge" required placeholder="What specific problem do you want suggestions on?"></textarea>
+    </div>
+    <div class="field">
+      <label>Tags (comma-separated)</label>
+      <input type="text" name="tags" placeholder="e.g. Manufacturing, Quality Control">
+    </div>
+    <button class="primary" type="submit">Post challenge →</button>
+  </form>
+</div>
+{% endblock %}

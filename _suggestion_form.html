@@ -1,0 +1,17 @@
+<div class="block-label">Submit your suggestion</div>
+<form method="POST" action="{{ url_for('suggestions.submit') }}">
+  <input type="hidden" name="challenge_id" value="{{ c['id'] }}">
+  <div class="field">
+    <label>Your name</label>
+    <input type="text" name="name" required placeholder="e.g. Aditi Rao">
+  </div>
+  <div class="field">
+    <label>Idea title</label>
+    <input type="text" name="title" required placeholder="Short summary of your idea">
+  </div>
+  <div class="field">
+    <label>Description</label>
+    <textarea name="desc" required placeholder="Explain your suggestion — how it solves the challenge above"></textarea>
+  </div>
+  <button class="primary" type="submit">Submit suggestion →</button>
+</form>

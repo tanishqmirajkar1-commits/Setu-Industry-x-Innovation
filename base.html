@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setu — Industry × Innovator Bridge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shared.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/person1-home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/person3-browse.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/person4-forms.css') }}">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark"></div>
+    <div>
+      <div class="logo-text">Setu</div>
+      <div class="logo-sub">Industry × Innovator</div>
+    </div>
+  </div>
+  <nav>
+    {% if session.get('role') %}
+      <span class="role-pill active">{{ 'INDUSTRY MODE' if session['role'] == 'industry' else 'INNOVATOR MODE' }}</span>
+      <a href="{{ url_for('home.switch_role') }}"><button class="ghost" type="button">Switch role</button></a>
+    {% endif %}
+  </nav>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<div class="toast{% if get_flashed_messages() %} show{% endif %}" id="toast">
+  {{ get_flashed_messages()[0] if get_flashed_messages() else '' }}
+</div>
+<script>
+  const t = document.getElementById('toast');
+  if (t.classList.contains('show')) {
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+</script>
+</body>
+</html>

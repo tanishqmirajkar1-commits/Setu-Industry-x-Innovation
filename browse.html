@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="section-head">
+  <h2 class="display">Open Challenges</h2>
+  <span class="count">{{ challenges|length }} listed</span>
+</div>
+<div class="grid">
+  {% for c in challenges %}
+  <a href="{{ url_for('browse.detail', challenge_id=c['id']) }}" style="text-decoration:none; color:inherit;">
+    <div class="card">
+      <div class="card-tag">{{ c['id'].upper() }}</div>
+      <div class="sector">{{ c['sector'] }}</div>
+      <h3 class="display">{{ c['challenge'][:70] }}{% if c['challenge']|length > 70 %}…{% endif %}</h3>
+      <div class="company">{{ c['company'] }}</div>
+      <p class="desc">{{ c['workflow'][:120] }}…</p>
+      <div class="card-foot">
+        <span>{{ counts.get(c['id'], 0) }} suggestion{{ '' if counts.get(c['id'], 0) == 1 else 's' }} so far</span>
+        <span style="color:var(--accent)">View →</span>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

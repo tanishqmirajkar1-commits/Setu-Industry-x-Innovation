@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{{ url_for('browse.browse') }}" class="back-link">← Back to challenges</a>
+<div class="detail-header">
+  <div class="sector">{{ c['sector'] }}</div>
+  <h1 class="display">{{ c['company'] }}</h1>
+  <div class="company mono">{{ c['id'].upper() }} · {{ c['tags']|join(' · ') }}</div>
+</div>
+<div class="two-col">
+  <div>
+    <div class="block">
+      <div class="block-label">How this industry works</div>
+      <p>{{ c['workflow'] }}</p>
+    </div>
+    <div class="block">
+      <div class="block-label">The challenge</div>
+      <p>{{ c['challenge'] }}</p>
+    </div>
+    <div class="block">
+      {% include "_suggestion_list.html" %}
+    </div>
+  </div>
+  <div>
+    <div class="form-panel">
+      {% include "_suggestion_form.html" %}
+    </div>
+  </div>
+</div>
+{% endblock %}
