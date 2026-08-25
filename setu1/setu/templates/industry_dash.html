@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="section-head">
+  <h2 class="display">Industry Dashboard</h2>
+  <a href="{{ url_for('industry.post_challenge') }}"><button class="ghost" type="button">+ Post new challenge</button></a>
+</div>
+
+{% if challenges|length == 0 %}
+  <div class="empty"><span class="display">No challenges posted yet</span>Post your first challenge to start receiving suggestions.</div>
+{% endif %}
+
+{% for c in challenges %}
+  <div class="card" style="cursor:default; margin-bottom:18px;">
+    <div class="card-tag">{{ c['id'].upper() }}</div>
+    <div class="sector">{{ c['sector'] }} · {{ c['company'] }}</div>
+    <h3 class="display">{{ c['challenge'] }}</h3>
+    <div class="block-label" style="margin-top:16px;">Suggestions received ({{ by_challenge.get(c['id'], [])|length }})</div>
+    {% with suggestions = by_challenge.get(c['id'], []), show_actions = true %}
+      {% include "_suggestion_list.html" %}
+    {% endwith %}
+  </div>
+{% endfor %}
+{% endblock %}
